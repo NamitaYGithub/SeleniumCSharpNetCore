@@ -1,13 +1,20 @@
 ﻿Feature: Login
-	Check if login functionality works
 
+		
 
 @mytag
-Scenario: Login user as Administrator
-	Given I navigate to application
-	And I click the Login link
-	And I enter username and password
-		| UserName | Password |
-		| admin    | password |
-	And I click login
-	Then I should see user logged in to the application
+Scenario Outline: Login to the RightMove
+	Given I launch the RightMove
+	And I accept the cookies
+	And I Select Sign In
+	And I enter Email Address and password
+	    | EmailAddress | Password |
+	    |namitatest@yahoo.com|Password!123|    
+    And I select SignIn button
+	
+	
+	
+
+
+
+

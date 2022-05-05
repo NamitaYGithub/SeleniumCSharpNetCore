@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using NUnit.Framework;
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -14,20 +15,39 @@ namespace SeleniumCSharpNetCore.Pages
             Driver = driver;
         }
 
-        IWebElement txtUserName => Driver.FindElement(By.Name("UserName"));
-        IWebElement txtPassword => Driver.FindElement(By.Name("Password"));
-        IWebElement btnLogin => Driver.FindElement(By.CssSelector(".btn-default"));
 
 
-        public void EnterUserNameAndPassword(string userName, string password)
+        IWebElement acceptAllCookies => Driver.FindElement(By.XPath("(//button[@title='Allow all cookies'])[1]"));
+        IWebElement emailAddTextBox => Driver.FindElement(By.XPath("//input[@id='email-input']"));
+        IWebElement passwordTextBox => Driver.FindElement(By.XPath("//input[@name='password']"));
+        IWebElement tabSignin => Driver.FindElement(By.XPath("//span[@class='user-text sign-in-link']"));
+        IWebElement signInButton => Driver.FindElement(By.XPath("//button[@id='submit']"));
+        IWebElement viewMyRightmoveElement => Driver.FindElement(By.XPath("(//a[@target='_top'])[2]"));
+
+
+
+
+        public void AcceptCookies()
         {
-            txtUserName.SendKeys(userName);
-            txtPassword.SendKeys(password);
+            System.Threading.Thread.Sleep(3000);
+            acceptAllCookies.Click();
+        }
+        public void ClickSigninTab()
+        {
+            tabSignin.Click();
+        }
+        public void EnterUserNameAndPassword(string emailAddress, string password)
+        {
+            emailAddTextBox.SendKeys(emailAddress);
+            passwordTextBox.SendKeys(password);
+
+        }
+        public void SigninButton()
+        {
+            signInButton.Click();
+            Assert.IsTrue(viewMyRightmoveElement.Displayed);
         }
 
-        public void ClickLogin()
-        {
-            btnLogin.Click();
-        }
+
     }
 }
