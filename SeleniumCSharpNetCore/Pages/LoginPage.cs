@@ -9,6 +9,7 @@ namespace SeleniumCSharpNetCore.Pages
     public class LoginPage
     {
         private IWebDriver Driver;
+        private const string LoginUrl = "https://www.rightmove.co.uk/";
 
         public LoginPage(IWebDriver driver)
         {
@@ -25,7 +26,10 @@ namespace SeleniumCSharpNetCore.Pages
         IWebElement viewMyRightmoveElement => Driver.FindElement(By.XPath("(//a[@target='_top'])[2]"));
 
 
-
+        public void NavigateToURL()
+        {
+            Driver.Navigate().GoToUrl(LoginUrl);
+        }
 
         public void AcceptCookies()
         {
@@ -45,6 +49,7 @@ namespace SeleniumCSharpNetCore.Pages
         public void SigninButton()
         {
             signInButton.Click();
+            System.Threading.Thread.Sleep(3000);
             Assert.IsTrue(viewMyRightmoveElement.Displayed);
         }
 

@@ -28,9 +28,10 @@ namespace SeleniumCSharpNetCore.Steps
         [Given(@"I launch the RightMove")]
         public void GivenILaunchTheRightMove()
         {
-            _driverHelper.Driver.Navigate().GoToUrl("https://www.rightmove.co.uk/");
+            loginPage.NavigateToURL();
 
             Assert.AreEqual("Rightmove - UK's number one property website for properties for sale and to rent", _driverHelper.Driver.Title);
+
         }
 
         [Given(@"I accept the cookies")]
@@ -57,7 +58,10 @@ namespace SeleniumCSharpNetCore.Steps
         public void GivenISelectSignInButton()
         {
             loginPage.SigninButton();
-
+            ITakesScreenshot ScreenShortDriver = (ITakesScreenshot)_driverHelper.Driver;
+            Screenshot screenShot = ScreenShortDriver.GetScreenshot();
+            Assert.IsNotNull(screenShot);
+            screenShot.SaveAsFile("aboutpage.Png", ScreenshotImageFormat.Png);
         }
 
 
