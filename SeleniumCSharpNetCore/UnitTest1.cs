@@ -38,6 +38,8 @@ namespace SeleniumCSharpNetCore
             Assert.Pass();
         }
 
+        //Check in master branch
+
         //[Test]
         //public void LoginTest()
         //{
